@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player - Spotify Style</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="spotify-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                <span>Music Player</span>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" onclick="showPage('home'); return false;">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showPage('search'); return false;">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                    <span>Search</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showPage('library'); return false;">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+                    </svg>
+                    <span>Your Library</span>
+                </a>
+            </nav>
+
+            <div class="library-section">
+                <a href="#" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    <span>Create Playlist</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span>Liked Songs</span>
+                </a>
+            </div>
+
+            <div class="playlists">
+                <div class="playlist-link active">My Playlist #1</div>
+                <div class="playlist-link">Chill Vibes</div>
+                <div class="playlist-link">Workout Mix</div>
+                <div class="playlist-link">Study Session</div>
+                <div class="playlist-link">Party Hits</div>
+                <div class="playlist-link">Road Trip</div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="nav-arrows">
+                    <button class="arrow-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                    </button>
+                    <button class="arrow-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="user-section">
+                    <button class="upgrade-btn">Upgrade</button>
+                    <div class="user-profile">
+                        <div class="avatar">MM</div>
+                        <span>Madhukanth M</span>
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="content-area">
+                <!-- Home Page -->
+                <div id="home-page" class="page active">
+                <section class="section">
+                    <h2 class="section-title">Good evening</h2>
+                    <div class="quick-picks">
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <span>Liked Songs</span>
+                        </div>
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                </svg>
+                            </div>
+                            <span>My Playlist #1</span>
+                        </div>
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                </svg>
+                            </div>
+                            <span>Chill Vibes</span>
+                        </div>
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                </svg>
+                            </div>
+                            <span>Workout Mix</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recently played</h2>
+                        <a href="#" class="see-all">See all</a>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Midnight Dreams</h3>
+                            <p class="card-subtitle">Synthwave Artist</p>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Neon Nights</h3>
+                            <p class="card-subtitle">Retro Wave</p>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Digital Paradise</h3>
+                            <p class="card-subtitle">Cyber Sound</p>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Electric Dreams</h3>
+                            <p class="card-subtitle">Wave Rider</p>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                    <svg viewBox="0 0 24 24" fill="#333">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Summer Breeze</h3>
+                            <p class="card-subtitle">Chill Master</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Made for you</h2>
+                        <a href="#" class="see-all">See all</a>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Daily Mix 1</h3>
+                            <p class="card-subtitle">Synthwave Artist, Retro Wave and more</p>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Daily Mix 2</h3>
+                            <p class="card-subtitle">Cyber Sound, Wave Rider and more</p>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%);">
+                                    <svg viewBox="0 0 24 24" fill="#666">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Discover Weekly</h3>
+                            <p class="card-subtitle">Your weekly mixtape of fresh music</p>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
+                                    <svg viewBox="0 0 24 24" fill="#333">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Release Radar</h3>
+                            <p class="card-subtitle">Catch all the latest music</p>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img">
+                                <div class="album-cover" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);">
+                                    <svg viewBox="0 0 24 24" fill="#555">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                                <button class="play-card-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="card-title">Chill Hits</h3>
+                            <p class="card-subtitle">Kick back to the best new and recent chill</p>
+                        </div>
+                    </div>
+                </section>
+                </div>
+
+                <!-- Search Page -->
+                <div id="search-page" class="page">
+                    <div class="search-header">
+                        <div class="search-box">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                            <input type="text" placeholder="What do you want to listen to?" class="search-input">
+                        </div>
+                    </div>
+
+                    <section class="section">
+                        <h2 class="section-title">Browse all</h2>
+                        <div class="genre-grid">
+                            <div class="genre-card" style="background: linear-gradient(135deg, #e61e32 0%, #b21e35 100%);">
+                                <span>Pop</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #1e3264 0%, #2d5f88 100%);">
+                                <span>Hip-Hop</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #b06239 0%, #c96850 100%);">
+                                <span>Rock</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #8d67ab 0%, #7358a7 100%);">
+                                <span>Electronic</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #148a08 0%, #1db954 100%);">
+                                <span>Indie</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #dc148c 0%, #f252a2 100%);">
+                                <span>Jazz</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #e8115b 0%, #f33f7a 100%);">
+                                <span>Latin</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #477d95 0%, #5c9ab3 100%);">
+                                <span>Classical</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #777777 0%, #999999 100%);">
+                                <span>Metal</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #8c1932 0%, #a91d3a 100%);">
+                                <span>Country</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #509bf5 0%, #6bb6ff 100%);">
+                                <span>Blues</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="genre-card" style="background: linear-gradient(135deg, #d84000 0%, #f05a28 100%);">
+                                <span>R&B</span>
+                                <div class="genre-icon">
+                                    <svg viewBox="0 0 24 24" fill="white">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Library Page -->
+                <div id="library-page" class="page">
+                    <div class="library-tabs">
+                        <button class="library-tab active">Playlists</button>
+                        <button class="library-tab">Artists</button>
+                        <button class="library-tab">Albums</button>
+                        <button class="library-tab">Podcasts</button>
+                    </div>
+
+                    <section class="section">
+                        <div class="library-actions">
+                            <div class="search-filter">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                                </svg>
+                                <input type="text" placeholder="Search in Your Library" class="library-search">
+                            </div>
+                            <div class="sort-button">
+                                <span>Recents</span>
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M7 10l5 5 5-5z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <div class="library-list">
+                            <div class="library-item">
+                                <div class="library-item-img">
+                                    <div style="background: linear-gradient(135deg, #1db954 0%, #1aa34a 100%); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <svg viewBox="0 0 24 24" fill="white" style="width: 28px; height: 28px;">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="library-item-info">
+                                    <div class="library-item-title">Liked Songs</div>
+                                    <div class="library-item-meta">Playlist • 42 songs</div>
+                                </div>
+                            </div>
+                            <div class="library-item">
+                                <div class="library-item-img">
+                                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <svg viewBox="0 0 24 24" fill="white" style="width: 28px; height: 28px;">
+                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="library-item-info">
+                                    <div class="library-item-title">My Playlist #1</div>
+                                    <div class="library-item-meta">Playlist • Madhukanth M • 24 songs</div>
+                                </div>
+                            </div>
+                            <div class="library-item">
+                                <div class="library-item-img">
+                                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <svg viewBox="0 0 24 24" fill="white" style="width: 28px; height: 28px;">
+                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="library-item-info">
+                                    <div class="library-item-title">Chill Vibes</div>
+                                    <div class="library-item-meta">Playlist • Madhukanth M • 18 songs</div>
+                                </div>
+                            </div>
+                            <div class="library-item">
+                                <div class="library-item-img">
+                                    <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <svg viewBox="0 0 24 24" fill="white" style="width: 28px; height: 28px;">
+                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="library-item-info">
+                                    <div class="library-item-title">Workout Mix</div>
+                                    <div class="library-item-meta">Playlist • Madhukanth M • 30 songs</div>
+                                </div>
+                            </div>
+                            <div class="library-item">
+                                <div class="library-item-img">
+                                    <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <svg viewBox="0 0 24 24" fill="white" style="width: 28px; height: 28px;">
+                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="library-item-info">
+                                    <div class="library-item-title">Study Session</div>
+                                    <div class="library-item-meta">Playlist • Madhukanth M • 15 songs</div>
+                                </div>
+                            </div>
+                            <div class="library-item">
+                                <div class="library-item-img">
+                                    <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <svg viewBox="0 0 24 24" fill="#333" style="width: 28px; height: 28px;">
+                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="library-item-info">
+                                    <div class="library-item-title">Party Hits</div>
+                                    <div class="library-item-meta">Playlist • Madhukanth M • 50 songs</div>
+                                </div>
+                            </div>
+                            <div class="library-item">
+                                <div class="library-item-img">
+                                    <div style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                        <svg viewBox="0 0 24 24" fill="white" style="width: 28px; height: 28px;">
+                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="library-item-info">
+                                    <div class="library-item-title">Road Trip</div>
+                                    <div class="library-item-meta">Playlist • Madhukanth M • 36 songs</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Now Playing Bar -->
+        <footer class="now-playing-bar">
+            <div class="now-playing-left">
+                <div class="current-track-img">
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); width: 100%; height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                        <svg viewBox="0 0 24 24" fill="white" style="width: 28px; height: 28px;">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="current-track-info">
+                    <div class="track-name">Midnight Dreams</div>
+                    <div class="track-artist">Synthwave Artist</div>
+                </div>
+                <button class="like-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="now-playing-center">
+                <div class="player-controls">
+                    <button class="player-btn shuffle-btn">
+                        <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M11 4.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V5.41l-2.29 2.3a.5.5 0 0 1-.71-.71L13.59 4H11.5a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M10.59 11.71A.5.5 0 0 1 11 11.5H14a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-2.59l-2.29 2.3a.5.5 0 0 1-.71-.71l2.29-2.29H11.5a.5.5 0 0 1-.41-.21zM4.5 4.5l6 6-6 6"/>
+                        </svg>
+                    </button>
+                    <button class="player-btn">
+                        <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"/>
+                        </svg>
+                    </button>
+                    <button class="player-btn play-pause-btn">
+                        <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/>
+                        </svg>
+                    </button>
+                    <button class="player-btn">
+                        <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"/>
+                        </svg>
+                    </button>
+                    <button class="player-btn repeat-btn">
+                        <svg viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M0 4.75A3.75 3.75 0 0 1 3.75 1h8.5A3.75 3.75 0 0 1 16 4.75v5a3.75 3.75 0 0 1-3.75 3.75H9.81l1.018 1.018a.75.75 0 1 1-1.06 1.06L6.939 12.75l2.829-2.828a.75.75 0 1 1 1.06 1.06L9.811 12h2.439a2.25 2.25 0 0 0 2.25-2.25v-5a2.25 2.25 0 0 0-2.25-2.25h-8.5a2.25 2.25 0 0 0-2.25 2.25v5a2.25 2.25 0 0 0 2.25 2.25h.5a.75.75 0 0 1 0 1.5h-.5A3.75 3.75 0 0 1 0 9.75v-5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="playback-bar">
+                    <div class="playback-time">0:00</div>
+                    <div class="playback-progress">
+                        <div class="playback-fill" style="width: 35%;"></div>
+                        <div class="playback-handle"></div>
+                    </div>
+                    <div class="playback-time">3:45</div>
+                </div>
+            </div>
+
+            <div class="now-playing-right">
+                <button class="player-btn">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M13.426 2.574a2.831 2.831 0 0 0-4.797 1.55l3.247 3.247a2.831 2.831 0 0 0 1.55-4.797zM10.5 8.118l-2.619-2.62A63303.13 63303.13 0 0 0 4.74 9.075L2.065 12.12a1.287 1.287 0 0 0 1.816 1.816l3.044-2.676 3.576-3.143zM8.12 3.72a4.331 4.331 0 1 1 6.122 6.122l-2.619 2.62a.5.5 0 0 1-.707 0l-2.619-2.62a.5.5 0 0 1 0-.707l2.619-2.62z"/>
+                    </svg>
+                </button>
+                <button class="player-btn">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M6 2.75C6 1.784 6.784 1 7.75 1h6.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15h-6.5A1.75 1.75 0 0 1 6 13.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25h-6.5zm-5 0a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25H4v1.5H2.75A1.75 1.75 0 0 1 1 13.25V2.75C1 1.784 1.784 1 2.75 1H4v1.5H2.75z"/>
+                    </svg>
+                </button>
+                <button class="player-btn volume-btn" onclick="toggleMute()">
+                    <svg id="volume-icon" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65L4.099 11.3H1.75a.75.75 0 0 1-.75-.75V5.45a.75.75 0 0 1 .75-.75h2.35L9.116.85a.75.75 0 0 1 .625-.001zm-1.116 1.65L4.75 5.85a.75.75 0 0 1-.375.1H2v4.1h2.375a.75.75 0 0 1 .375.1l3.875 3.35V2.5zM12.196 3.222a.75.75 0 0 1 1.06-.037 7.5 7.5 0 0 1 0 10.63.75.75 0 1 1-1.023-1.097 6 6 0 0 0 0-8.436.75.75 0 0 1-.037-1.06z"/>
+                        <path d="M10.564 4.868a.75.75 0 0 1 1.064.025 4.5 4.5 0 0 1 0 6.214.75.75 0 1 1-1.09-1.03 3 3 0 0 0 0-4.154.75.75 0 0 1 .026-1.055z"/>
+                    </svg>
+                </button>
+                <div class="volume-slider" id="volumeSlider" onclick="setVolume(event)">
+                    <div class="volume-slider-fill" id="volumeFill" style="width: 70%;"></div>
+                </div>
+                <button class="player-btn">
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M1.75 3a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5H1.75zM1 7.75A.75.75 0 0 1 1.75 7h10.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zm0 4A.75.75 0 0 1 1.75 11h6.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1-.75-.75z"/>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageName) {
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked nav item
+            event.target.closest('.nav-item').classList.add('active');
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageName + '-page').classList.add('active');
+        }
+
+        // Volume Control
+        let currentVolume = 70;
+        let isMuted = false;
+        let previousVolume = 70;
+
+        function setVolume(event) {
+            const slider = document.getElementById('volumeSlider');
+            const fill = document.getElementById('volumeFill');
+            const rect = slider.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const percentage = (clickX / rect.width) * 100;
+            
+            currentVolume = Math.max(0, Math.min(100, percentage));
+            fill.style.width = currentVolume + '%';
+            
+            if (currentVolume === 0) {
+                isMuted = true;
+                updateVolumeIcon();
+            } else {
+                isMuted = false;
+                updateVolumeIcon();
+            }
+        }
+
+        function toggleMute() {
+            const fill = document.getElementById('volumeFill');
+            
+            if (!isMuted) {
+                previousVolume = currentVolume;
+                currentVolume = 0;
+                isMuted = true;
+            } else {
+                currentVolume = previousVolume || 70;
+                isMuted = false;
+            }
+            
+            fill.style.width = currentVolume + '%';
+            updateVolumeIcon();
+        }
+
+        function updateVolumeIcon() {
+            const icon = document.getElementById('volume-icon');
+            
+            if (isMuted || currentVolume === 0) {
+                icon.innerHTML = '<path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65L4.099 11.3H1.75a.75.75 0 0 1-.75-.75V5.45a.75.75 0 0 1 .75-.75h2.35L9.116.85a.75.75 0 0 1 .625-.001zm-1.116 1.65L4.75 5.85a.75.75 0 0 1-.375.1H2v4.1h2.375a.75.75 0 0 1 .375.1l3.875 3.35V2.5z"/><path d="M12.5 8l4-4m0 4l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>';
+            } else if (currentVolume < 30) {
+                icon.innerHTML = '<path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65L4.099 11.3H1.75a.75.75 0 0 1-.75-.75V5.45a.75.75 0 0 1 .75-.75h2.35L9.116.85a.75.75 0 0 1 .625-.001zm-1.116 1.65L4.75 5.85a.75.75 0 0 1-.375.1H2v4.1h2.375a.75.75 0 0 1 .375.1l3.875 3.35V2.5z"/>';
+            } else if (currentVolume < 70) {
+                icon.innerHTML = '<path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65L4.099 11.3H1.75a.75.75 0 0 1-.75-.75V5.45a.75.75 0 0 1 .75-.75h2.35L9.116.85a.75.75 0 0 1 .625-.001zm-1.116 1.65L4.75 5.85a.75.75 0 0 1-.375.1H2v4.1h2.375a.75.75 0 0 1 .375.1l3.875 3.35V2.5z"/><path d="M10.564 4.868a.75.75 0 0 1 1.064.025 4.5 4.5 0 0 1 0 6.214.75.75 0 1 1-1.09-1.03 3 3 0 0 0 0-4.154.75.75 0 0 1 .026-1.055z"/>';
+            } else {
+                icon.innerHTML = '<path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65L4.099 11.3H1.75a.75.75 0 0 1-.75-.75V5.45a.75.75 0 0 1 .75-.75h2.35L9.116.85a.75.75 0 0 1 .625-.001zm-1.116 1.65L4.75 5.85a.75.75 0 0 1-.375.1H2v4.1h2.375a.75.75 0 0 1 .375.1l3.875 3.35V2.5zM12.196 3.222a.75.75 0 0 1 1.06-.037 7.5 7.5 0 0 1 0 10.63.75.75 0 1 1-1.023-1.097 6 6 0 0 0 0-8.436.75.75 0 0 1-.037-1.06z"/><path d="M10.564 4.868a.75.75 0 0 1 1.064.025 4.5 4.5 0 0 1 0 6.214.75.75 0 1 1-1.09-1.03 3 3 0 0 0 0-4.154.75.75 0 0 1 .026-1.055z"/>';
+            }
+        }
+
+        // Play/Pause Toggle
+        let isPlaying = false;
+        const playPauseBtn = document.querySelector('.play-pause-btn');
+        
+        playPauseBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                playPauseBtn.innerHTML = '<svg viewBox="0 0 16 16" fill="currentColor" style="width: 16px; height: 16px;"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>';
+            } else {
+                playPauseBtn.innerHTML = '<svg viewBox="0 0 16 16" fill="currentColor" style="width: 16px; height: 16px;"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>';
+            }
+        });
+
+        // Like Button Toggle
+        const likeBtn = document.querySelector('.like-btn');
+        likeBtn.addEventListener('click', () => {
+            likeBtn.classList.toggle('active');
+        });
+
+        // Player Button Active States
+        document.querySelectorAll('.shuffle-btn, .repeat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
